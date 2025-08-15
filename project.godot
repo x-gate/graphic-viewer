@@ -12,8 +12,12 @@ config_version=5
 
 config/name="graphic-viewer"
 run/main_scene="uid://hyvlt13flbqe"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GraphicInfoData="*res://scripts/GraphicInfoData.cs"
 
 [dotnet]
 

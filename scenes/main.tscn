@@ -89,15 +89,6 @@ layout_mode = 2
 columns = 2
 script = ExtResource("3_sugp2")
 
-[node name="PopupPanel" type="PopupPanel" parent="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer"]
-size = Vector2i(1152, 648)
-
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer/PopupPanel"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 1148.0
-offset_bottom = 644.0
-
 [node name="ID" type="Label" parent="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer"]
 layout_mode = 2
 text = "編號"
@@ -191,3 +182,5 @@ editable = false
 [connection signal="validated_game_paths" from="MarginContainer/HBoxContainer/RightVBoxContainer/GameFolderChooser/LineEdit" to="MarginContainer/HBoxContainer/LeftVBoxContainer" method="_on_line_edit_validated_game_paths"]
 [connection signal="validated_game_paths" from="MarginContainer/HBoxContainer/RightVBoxContainer/GameFolderChooser/LineEdit" to="MarginContainer/HBoxContainer/RightVBoxContainer/GamerVersionChooser" method="_on_line_edit_validated_game_paths"]
 [connection signal="game_file_opened" from="MarginContainer/HBoxContainer/RightVBoxContainer/GamerVersionChooser" to="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer" method="_on_gamer_version_chooser_game_file_opened"]
+[connection signal="current_updated" from="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer" to="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer" method="_on_current_updated"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer/IDInput" to="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer" method="_on_id_input_value_changed"]
