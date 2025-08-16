@@ -3,6 +3,10 @@ on:
   release: 
     types: [prereleased, released]
 
+env:
+  GODOT_VERSION: 4.4.1
+  EXPORT_NAME: graphic-viewer
+
 jobs:
   build:
     runs-on: ubuntu-22.04
