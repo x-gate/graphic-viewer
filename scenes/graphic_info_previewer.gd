@@ -16,8 +16,7 @@ signal current_updated(data: GraphicInfoData)
 
 var graphic_info: GraphicInfo
 
-func _on_gamer_version_chooser_game_file_opened(info: FileAccess, _data: FileAccess) -> void:
-	info.call_deferred("close")
+func _on_gamer_version_chooser_game_file_opened(info: PackedByteArray, _data: PackedByteArray) -> void:
 	show()
 
 	graphic_info = null

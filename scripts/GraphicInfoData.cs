@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Godot;
+using Godot.Collections;
 
 namespace graphicviewer.scripts;
 
@@ -19,7 +21,7 @@ public partial class GraphicInfoData : Node
 	public byte Access { get; set; }
 	public int Map { get; set; }
 
-	public static GraphicInfoData Load (byte[] data)
+	public static GraphicInfoData Load(byte[] data)
 	{
 		BinaryReader br = new BinaryReader(new BufferedStream(new MemoryStream(data)));
 		GraphicInfoData d = new GraphicInfoData();

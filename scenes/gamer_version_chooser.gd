@@ -1,6 +1,6 @@
 extends GridContainer
 
-signal game_file_opened(info: FileAccess, data: FileAccess)
+signal game_file_opened(info: PackedByteArray, data: PackedByteArray)
 
 @onready var menu_button: MenuButton = $MenuButton
 
@@ -22,17 +22,14 @@ func _load_game_files(id: int) -> void:
 	var path = game_paths[id]
 	menu_button.text = path["name"]
 	
-	var info_file = FileAccess.open(path.info_file_path, FileAccess.READ)
-	if info_file == null:
+	var info_file_data = FileAccess.get_file_as_bytes(path.info_file_path)
+	if info_file_data.is_empty():
 		printerr("[Game Version Chooser] Cannot open %s: %s" % [path.info_file_path, error_string(FileAccess.get_open_error())])
 		return
 	
-	var data_file = FileAccess.open(path.data_file_path, FileAccess.READ)
-	if data_file == null:
+	var data_file_data = FileAccess.get_file_as_bytes(path.data_file_path)
+	if data_file_data.is_empty():
 		printerr("[Game Version Chooser] Cannot open %s: %s" % [path.data_file_path, error_string(FileAccess.get_open_error())])
 		return
 	
-	print("[Game Version Chooser] Opened info_file: %s" % path.info_file_path)
-	print("[Game Version Chooser] Opened data_file: %s" % path.data_file_path)
-	
-	game_file_opened.emit(info_file, data_file)
+	game_file_opened.emit(info_file_data, data_file_data)
