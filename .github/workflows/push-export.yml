@@ -4,7 +4,6 @@ on:
     branches:
       - main
       - "feat/**"
-      - "chore/ci"
 
 env:
   GODOT_VERSION: 4.4.1
