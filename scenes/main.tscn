@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://hyvlt13flbqe"]
+[gd_scene load_steps=6 format=3 uid="uid://hyvlt13flbqe"]
 
 [ext_resource type="Script" uid="uid://cck6oqq4s0y3p" path="res://scenes/preview_container.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://cwo44bl0aa3iv" path="res://scenes/game_folder_chooser.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://brqljdaat63df" path="res://scenes/gamer_version_chooser.gd" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://oac4w2mjhvic" path="res://scenes/graphic_preview.gd" id="2_tbgi4"]
 [ext_resource type="Script" uid="uid://efk1ohv3xy23" path="res://scenes/graphic_info_previewer.gd" id="3_sugp2"]
 
 [node name="Control" type="Control"]
@@ -35,10 +36,15 @@ script = ExtResource("1_jyhfs")
 layout_mode = 2
 text = "請選擇調色板"
 
-[node name="GraphicPreview" type="TextureRect" parent="MarginContainer/HBoxContainer/LeftVBoxContainer"]
+[node name="Control" type="CenterContainer" parent="MarginContainer/HBoxContainer/LeftVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GraphicPreview" type="TextureRect" parent="MarginContainer/HBoxContainer/LeftVBoxContainer/Control"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("2_tbgi4")
 
 [node name="SaveButton" type="Button" parent="MarginContainer/HBoxContainer/LeftVBoxContainer"]
 layout_mode = 2
@@ -179,8 +185,11 @@ text = "地圖編號"
 layout_mode = 2
 editable = false
 
+[connection signal="palette_file_opened" from="MarginContainer/HBoxContainer/LeftVBoxContainer" to="MarginContainer/HBoxContainer/LeftVBoxContainer/Control/GraphicPreview" method="_on_left_v_box_container_palette_file_opened"]
 [connection signal="validated_game_paths" from="MarginContainer/HBoxContainer/RightVBoxContainer/GameFolderChooser/LineEdit" to="MarginContainer/HBoxContainer/LeftVBoxContainer" method="_on_line_edit_validated_game_paths"]
 [connection signal="validated_game_paths" from="MarginContainer/HBoxContainer/RightVBoxContainer/GameFolderChooser/LineEdit" to="MarginContainer/HBoxContainer/RightVBoxContainer/GamerVersionChooser" method="_on_line_edit_validated_game_paths"]
+[connection signal="game_file_opened" from="MarginContainer/HBoxContainer/RightVBoxContainer/GamerVersionChooser" to="MarginContainer/HBoxContainer/LeftVBoxContainer/Control/GraphicPreview" method="_on_gamer_version_chooser_game_file_opened"]
 [connection signal="game_file_opened" from="MarginContainer/HBoxContainer/RightVBoxContainer/GamerVersionChooser" to="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer" method="_on_gamer_version_chooser_game_file_opened"]
+[connection signal="current_updated" from="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer" to="MarginContainer/HBoxContainer/LeftVBoxContainer/Control/GraphicPreview" method="_on_graphic_info_previewer_current_updated"]
 [connection signal="current_updated" from="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer" to="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer" method="_on_current_updated"]
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer/IDInput" to="MarginContainer/HBoxContainer/RightVBoxContainer/GraphicInfoPreviewer" method="_on_id_input_value_changed"]
