@@ -1,6 +1,8 @@
 name: "Push Export"
 on:
   push:
+    tags:
+      - 'v*'
     branches:
       - main
       - "feat/**"
@@ -31,9 +33,15 @@ jobs:
         run: |
           mkdir -v -p builds/windows
           godot --headless --export-release "Windows Desktop" ./builds/windows/$EXPORT_NAME.exe
+          zip -r graphic-viewer_windows-x86_64.zip builds/windows/
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows
           path: builds/windows
           retention-days: 1
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: graphic-viewer_windows-x86_64.zip
