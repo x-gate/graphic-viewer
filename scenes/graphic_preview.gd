@@ -86,3 +86,11 @@ func _render() -> void:
 			texture.update(img)
 		else:
 			texture.set_image(img)
+
+
+func _on_save_button_pressed() -> void:
+	var img: Image = img_scales[0]
+	
+	var path = "user://%d-%d.webp" % [graphic_info.Id, img.get_data().get_string_from_utf32().hash()]
+	img.save_webp(path)
+	DisplayServer.clipboard_set(ProjectSettings.globalize_path(path))
