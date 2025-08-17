@@ -68,6 +68,8 @@ func _render() -> void:
 
 	var palette = Palette.build(palette_data)
 	var graphic = GraphicData.Load(graphic_data_file.get_buffer(graphic_info.Length))
+	if graphic == null:
+		return
 	
 	var img = Image.create(graphic_info.Width+1, graphic_info.Height+1, false, Image.FORMAT_RGBA8)
 	for i in range(0, len(graphic.Data)):
