@@ -68,6 +68,7 @@ func _render() -> void:
 
 	var palette = Palette.build(palette_data)
 	var graphic = GraphicData.Load(graphic_data_file.get_buffer(graphic_info.Length))
+	graphic.call_deferred("free")
 	if graphic == null:
 		return
 	

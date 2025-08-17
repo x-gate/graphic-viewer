@@ -20,6 +20,9 @@ func _on_line_edit_validated_game_paths(data_paths: Array, _palette_paths: Array
 
 func _load_game_files(id: int) -> void:
 	var path = game_paths[id]
+	if menu_button.text == path["name"]:
+		return
+
 	menu_button.text = path["name"]
 	
 	var info_file_data = FileAccess.get_file_as_bytes(path.info_file_path)
